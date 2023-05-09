@@ -1,0 +1,54 @@
+body {
+    background-color: #0177ce;
+    background-repeat: no-repeat;
+    background-image: url('mario.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+}
+
+form {
+    background-color: rgba(232, 148, 13, 0.8);
+    width: 400px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #120808;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+#login_button {
+    MARGIN-TOP: 30PX;
+    background-color: #fbfbf9;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #dd940d;
+}

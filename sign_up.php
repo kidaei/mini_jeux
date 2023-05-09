@@ -1,13 +1,31 @@
 <?php
-include("connect.php");
+
+
+
 if(isset($_POST['submit'])){
     $name=htmlspecialchars(strtolower(trim($_POST['name'])));
     $email=htmlspecialchars(strtolower(trim($_POST['email'])));
     $password=htmlspecialchars(strtolower(trim($_POST['password'])));
-    $query = "INSERT INTO signup(name,email,password )VALUE('$name','$email','$password')";
-    if(mysqli_query($con,$query)){
-        echo"welcome this is the page to login:"."<a href='login.php'>click</a>";
+    
+    // writing data into the login.csv file
+    $fp = fopen('login.csv', 'r');
+    $ft = fopen('temp.csv', 'w');
+
+    if ($fp) {
+        while ($data = fgetcsv($fp, 1000, ',')) {
+            fputcsv($ft, $data, ',');
+        }
     }
+
+    fputcsv($ft, [$email, $password], ',');
+
+    fclose($fp);
+    fclose($ft);
+
+    // destroy the original and rename the temp to original
+    unlink('login.csv');
+    rename('temp.csv', 'login.csv');
+    
 }
 
 
@@ -27,7 +45,8 @@ if(isset($_POST['submit'])){
         <div>
         <center>
         <form action="" method="POST">
-            <h1> SignUp </h1>
+            <h1>Mario game</h1>
+            <h2> SignUp </h2>
                 <table>
                     <tr>
                         <td>
@@ -54,6 +73,9 @@ if(isset($_POST['submit'])){
                     </tr>
                 </table>
         </form>
+        
+        <p>welcome this is the page to login:"."<a href='login.php'>click</a>";</p>
+
         </center>
         </div>
               

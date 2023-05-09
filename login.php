@@ -1,32 +1,45 @@
-<?php
-include("connect.php");
-session_start();
-if(isset($_POST['submit'])){
-    $name=htmlspecialchars(strtolower(trim($_POST['name'])));
-    $password=htmlspecialchars(strtolower(trim($_POST['password'])));
-    $query = "SELECT * FROM signup WHERE name='$name'&& password=$password";
-    if(mysqli_num_rows(mysqli_query($con,$query))>0){
-        $_SESSION['name']=$name;
-        header("location:jeux.php");
-    }else{
-        echo"wrong name or password";
-    }
-}
-?>
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <link rel="stylesheet" href="style.css">
+    <title>PHP & CSV</title>
 </head>
-    <body>
-        <div class="col-8 p-4 two">
-        <form action="" method="POST">
-        <label>name:</label><br><input type="text"name="name" placeholder="enter your name" required><br><br> 
-        <label>name:</label><br><input type="password"name="password" placeholder="enter your name" required><br><br>  
-        <button type="submit" name ="submit">LoginIn</button>
-        </div>
-    </body>
+<body>
+    <h1>Mario game</h1>
+    <center><h2>login</h2>
+    <form method="POST">
+        <center>
+        <label for="email">
+            E-mail:</br>
+            <input type="email" name="email" id="email" autocomplete="email">
+        </label>
+        </br>
+        <label for="password">
+            Password</br>
+            <input type="password" name="password" id="password" autocomplete="password">
+        </label>
+        </br>
+        <button id = "login_button"type="submit">Login</button>
+    </form>
+</body>
 </html>
+
+<?php
+
+if (isset($_POST['email']) && isset($_POST['password'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $loginFile = file('login.csv');
+    foreach ($loginFile as $row) {
+        $data = str_getcsv($row);
+        if ($data[0] === $email && $data[1] === $password) {
+            header('Location: login_success.php');
+            exit();
+        }
+    }
+    header('Location: login_failure.php');
+    exit();
+}

@@ -36,7 +36,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     foreach ($loginFile as $row) {
         $data = str_getcsv($row);
         if ($data[0] === $email && $data[1] === $password) {
-            header('Location: coo.html');
+            header('Location: game.html');
             exit();
         }
     }
